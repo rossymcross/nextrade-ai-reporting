@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-app: #f8f8fa;
+  --color-surface: #ffffff;
+  --color-primary: #008080;
+  --color-primary-600: #006b6b;
+  --color-primary-50: #e6f2f2;
+  --color-accent: #39ff14;
+  --color-ink: #1a1a1a;
+  --color-muted: #4c7570;
+  --color-hairline: #e5e7eb;
+
+  --color-background: var(--color-app);
+  --color-foreground: var(--color-ink);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
+
+  --radius: 4px;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-app);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+.heading-tight {
+  letter-spacing: -0.035em;
+}
+.heading-xtight {
+  letter-spacing: -0.05em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.hairline {
+  border-color: var(--color-hairline);
+}
+
+.ai-accent {
+  box-shadow: inset 3px 0 0 0 var(--color-accent);
+}
+
+@keyframes limePulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.lime-pulse {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.lime-pulse > span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  animation: limePulse 1.2s infinite ease-in-out;
+}
+.lime-pulse > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.lime-pulse > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
